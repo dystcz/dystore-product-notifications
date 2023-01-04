@@ -3,12 +3,12 @@
 namespace Dystcz\LunarProductNotification\Tests;
 
 use Cartalyst\Converter\Laravel\ConverterServiceProvider;
+use Dystcz\LunarApi\LunarApiServiceProvider;
 use Dystcz\LunarProductNotification\LunarProductNotificationServiceProvider;
-use Dystcz\LunarProductNotification\Tests\Stubs\ProductVariants\ProductVariantRouteGroup;
+use Dystcz\LunarProductNotification\Tests\Stubs\JsonApi\Server;
 use Dystcz\LunarProductNotification\Tests\Stubs\Users\User;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\Application;
-use Illuminate\Routing\Router;
 use Kalnoy\Nestedset\NestedSetServiceProvider;
 use LaravelJsonApi\Spec\ServiceProvider;
 use LaravelJsonApi\Testing\MakesJsonApiRequests;
@@ -19,6 +19,7 @@ use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\Activitylog\ActivitylogServiceProvider;
 use Spatie\LaravelBlink\BlinkServiceProvider;
 use Spatie\MediaLibrary\MediaLibraryServiceProvider;
+use function Orchestra\Testbench\artisan;
 
 abstract class TestCase extends Orchestra
 {
@@ -39,11 +40,13 @@ abstract class TestCase extends Orchestra
     }
 
     /**
-     * @param  Application  $app
+     * @param Application $app
      * @return array
      */
     protected function getPackageProviders($app)
     {
+        config()->set('lunar-api.additional_servers', [Server::class]);
+
         return [
             // Lunar Product Notification
             LunarProductNotificationServiceProvider::class,
@@ -52,6 +55,8 @@ abstract class TestCase extends Orchestra
             \LaravelJsonApi\Encoder\Neomerx\ServiceProvider::class,
             \LaravelJsonApi\Laravel\ServiceProvider::class,
             ServiceProvider::class,
+
+            LunarApiServiceProvider::class,
 
             // Lunar core
             LunarServiceProvider::class,
@@ -64,7 +69,7 @@ abstract class TestCase extends Orchestra
     }
 
     /**
-     * @param  Application  $app
+     * @param Application $app
      */
     public function getEnvironmentSetUp($app)
     {
@@ -95,16 +100,5 @@ abstract class TestCase extends Orchestra
     protected function defineDatabaseMigrations(): void
     {
         $this->loadLaravelMigrations();
-    }
-
-    /**
-     * Define routes setup.
-     *
-     * @param  Router  $router
-     * @return void
-     */
-    protected function defineRoutes($router)
-    {
-        (new ProductVariantRouteGroup)();
     }
 }

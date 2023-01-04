@@ -3,8 +3,12 @@
 namespace Dystcz\LunarProductNotification;
 
 use Dystcz\LunarProductNotification\Domain\ProductNotifications\Models\ProductNotification;
+use Dystcz\LunarProductNotification\Domain\ProductNotifications\Observers\ProductVariantObserver;
 use Dystcz\LunarProductNotification\Domain\ProductNotifications\Policies\ProductNotificationPolicy;
+use Dystcz\LunarReviews\Domain\Reviews\Models\Review;
 use Illuminate\Support\ServiceProvider;
+use Lunar\Models\Product;
+use Lunar\Models\ProductVariant;
 
 class LunarProductNotificationServiceProvider extends ServiceProvider
 {
@@ -17,6 +21,10 @@ class LunarProductNotificationServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->registerDynamicRelations();
+
+        ProductVariant::observe(ProductVariantObserver::class);
+
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
 
@@ -34,5 +42,12 @@ class LunarProductNotificationServiceProvider extends ServiceProvider
     {
         // Automatically apply the package configuration
         $this->mergeConfigFrom(__DIR__.'/../config/lunar-product-notifications.php', 'lunar-product-notifications');
+    }
+
+    protected function registerDynamicRelations(): void
+    {
+        ProductVariant::resolveRelationUsing('notifications', function ($model) {
+            return $model->morphMany(ProductNotification::class, 'purchasable');
+        });
     }
 }

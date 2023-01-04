@@ -14,20 +14,15 @@ return [
 
     // Configuration for specific domains
     'domains' => [
-        'reviews' => [
+        'product-notifications' => [
             'model' => Dystcz\LunarProductNotification\Domain\ProductNotifications\Models\ProductNotification::class,
 
             // Route groups which get registered
             // If you want to change the behaviour or add some data,
             // simply extend the package product groups and add your logic
             'route_groups' => [
-                'reviews' => Dystcz\LunarProductNotification\Domain\ProductNotifications\Http\Routing\ProductNotificationRouteGroup::class,
+                'product-notifications' => Dystcz\LunarProductNotification\Domain\ProductNotifications\Http\Routing\ProductNotificationRouteGroup::class,
             ],
-
-            // Default pagination
-            'pagination' => 12,
         ],
     ],
-
-    'auth_middleware' => 'auth',
 ];
