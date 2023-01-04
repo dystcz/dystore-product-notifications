@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create($this->prefix.'product_notifications', function (Blueprint $table) {
             $table->id();
-            $table->morphs('purchasable');
+            $table->morphs('purchasable', 'purchasable_index');
 
             $table->string('email');
 
