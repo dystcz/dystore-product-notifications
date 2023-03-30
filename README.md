@@ -1,4 +1,4 @@
-# Lunar reviews
+# Lunar product notifications
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/dystcz/lunar-product-notifications.svg?style=flat-square)](https://packagist.org/packages/dystcz/lunar-product-notifications)
 [![Total Downloads](https://img.shields.io/packagist/dt/dystcz/lunar-product-notifications.svg?style=flat-square)](https://packagist.org/packages/dystcz/lunar-product-notifications)
