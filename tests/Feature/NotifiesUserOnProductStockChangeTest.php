@@ -31,7 +31,7 @@ it('notifies user on product stock change', function () {
     );
 });
 
-it('notifies user just one', function () {
+it('notifies the user only once', function () {
     $notification = ProductNotificationFactory::new()
         ->for(
             ProductVariantFactory::new()->state(['stock' => 0]),

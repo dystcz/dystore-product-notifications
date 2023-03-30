@@ -56,6 +56,7 @@ abstract class TestCase extends Orchestra
             \LaravelJsonApi\Laravel\ServiceProvider::class,
             ServiceProvider::class,
 
+            // Lunar Api
             LunarApiServiceProvider::class,
 
             // Lunar core
