@@ -1,6 +1,6 @@
 <?php
 
-namespace Dystcz\LunarProductNotification\Tests\Stubs\Users;
+namespace Dystcz\LunarApiProductNotification\Tests\Stubs\Users;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;

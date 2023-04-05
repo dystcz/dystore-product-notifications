@@ -1,6 +1,6 @@
 <?php
 
-namespace Dystcz\LunarProductNotification\Tests\Stubs\ProductVariants;
+namespace Dystcz\LunarApiProductNotification\Tests\Stubs\ProductVariants;
 
 use LaravelJsonApi\Laravel\Http\Requests\ResourceRequest;
 use LaravelJsonApi\Validation\Rule as JsonApiRule;

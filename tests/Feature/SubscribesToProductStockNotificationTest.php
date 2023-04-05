@@ -1,12 +1,12 @@
 <?php
 
-use Dystcz\LunarProductNotification\Domain\ProductNotifications\Factories\ProductNotificationFactory;
-use Dystcz\LunarProductNotification\Domain\ProductNotifications\Models\ProductNotification;
-use Dystcz\LunarProductNotification\Tests\Stubs\Users\User;
-use Dystcz\LunarProductNotification\Tests\TestCase;
+use Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Factories\ProductNotificationFactory;
+use Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Models\ProductNotification;
+use Dystcz\LunarApiProductNotification\Tests\Stubs\Users\User;
+use Dystcz\LunarApiProductNotification\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Lunar\Database\Factories\ProductVariantFactory;
-use function Pest\Faker\faker;
+use function Pest\Faker\fake;
 
 uses(TestCase::class, RefreshDatabase::class);
 
@@ -18,7 +18,7 @@ test('user can subscribe to product stock notification', function () {
     $data = [
         'type' => 'product-notifications',
         'attributes' => [
-            'email' => $email = faker()->email,
+            'email' => $email = fake()->email,
             'purchasable_id' => $productVariant->id,
             'purchasable_type' => $productVariant::class,
         ],

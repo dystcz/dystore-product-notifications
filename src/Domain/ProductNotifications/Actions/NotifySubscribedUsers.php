@@ -1,8 +1,8 @@
 <?php
 
-namespace Dystcz\LunarProductNotification\Domain\ProductNotifications\Actions;
+namespace Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Actions;
 
-use Dystcz\LunarProductNotification\Domain\ProductNotifications\Notifications\ProductRestockedNotification;
+use Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Notifications\ProductRestockedNotification;
 use Illuminate\Support\Facades\Notification;
 use Lunar\Models\ProductVariant;
 

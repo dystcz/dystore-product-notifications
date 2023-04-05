@@ -1,6 +1,6 @@
 <?php
 
-namespace Dystcz\LunarProductNotification\Domain\ProductNotifications\Notifications;
+namespace Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;

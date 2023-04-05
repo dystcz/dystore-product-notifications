@@ -1,9 +1,9 @@
 <?php
 
-namespace Dystcz\LunarProductNotification\Domain\JsonApi\V1;
+namespace Dystcz\LunarApiProductNotification\Domain\JsonApi\V1;
 
 use Dystcz\LunarApi\Domain\JsonApi\Servers\Server as BaseServer;
-use Dystcz\LunarProductNotification\Domain\ProductNotifications\JsonApi\V1\ProductNotificationSchema;
+use Dystcz\LunarApiProductNotification\Domain\ProductNotifications\JsonApi\V1\ProductNotificationSchema;
 
 class Server extends BaseServer
 {

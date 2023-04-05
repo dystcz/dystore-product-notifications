@@ -1,8 +1,8 @@
 <?php
 
-namespace Dystcz\LunarProductNotification\Domain\ProductNotifications\Factories;
+namespace Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Factories;
 
-use Dystcz\LunarProductNotification\Domain\ProductNotifications\Models\ProductNotification;
+use Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Models\ProductNotification;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProductNotificationFactory extends Factory

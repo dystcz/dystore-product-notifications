@@ -1,6 +1,6 @@
 <?php
 
-namespace Dystcz\LunarProductNotification\Tests\Stubs\ProductVariants;
+namespace Dystcz\LunarApiProductNotification\Tests\Stubs\ProductVariants;
 
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Relations\BelongsToMany;

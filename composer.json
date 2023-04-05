@@ -1,14 +1,14 @@
 {
-    "name": "dystcz/lunar-product-notifications",
-    "description": "Lunar product notifications",
+    "name": "dystcz/lunar-api-product-notifications",
+    "description": "Lunar API product notifications",
     "keywords": [
         "dystcz",
         "laravel",
         "php",
         "lunar",
-        "lunar-product-notifications"
+        "lunar-api-product-notifications"
     ],
-    "homepage": "https://github.com/dystcz/lunar-product-notifications",
+    "homepage": "https://github.com/dystcz/lunar-api-product-notifications",
     "license": "MIT",
     "type": "library",
     "authors": [
@@ -33,16 +33,17 @@
         "nunomaduro/collision": "^7.0",
         "orchestra/testbench": "^8.0",
         "pestphp/pest": "^2.0",
+        "pestphp/pest-plugin-faker": "^2.0",
         "spatie/laravel-ray": "^1.32"
     },
     "autoload": {
         "psr-4": {
-            "Dystcz\\LunarProductNotification\\": "src"
+            "Dystcz\\LunarApiProductNotification\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Dystcz\\LunarProductNotification\\Tests\\": "tests"
+            "Dystcz\\LunarApiProductNotification\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -59,7 +60,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Dystcz\\LunarProductNotification\\LunarProductNotificationServiceProvider"
+                "Dystcz\\LunarApiProductNotification\\LunarApiProductNotificationServiceProvider"
             ]
         }
     },

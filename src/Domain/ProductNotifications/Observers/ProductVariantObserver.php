@@ -1,8 +1,8 @@
 <?php
 
-namespace Dystcz\LunarProductNotification\Domain\ProductNotifications\Observers;
+namespace Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Observers;
 
-use Dystcz\LunarProductNotification\Domain\ProductNotifications\Actions\NotifySubscribedUsers;
+use Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Actions\NotifySubscribedUsers;
 use Lunar\Models\ProductVariant;
 
 class ProductVariantObserver

@@ -1,8 +1,8 @@
 <?php
 
-use Dystcz\LunarProductNotification\Domain\ProductNotifications\Factories\ProductNotificationFactory;
-use Dystcz\LunarProductNotification\Domain\ProductNotifications\Notifications\ProductRestockedNotification;
-use Dystcz\LunarProductNotification\Tests\TestCase;
+use Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Factories\ProductNotificationFactory;
+use Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Notifications\ProductRestockedNotification;
+use Dystcz\LunarApiProductNotification\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Lunar\Database\Factories\ProductVariantFactory;
 

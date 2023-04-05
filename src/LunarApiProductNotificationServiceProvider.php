@@ -1,16 +1,14 @@
 <?php
 
-namespace Dystcz\LunarProductNotification;
+namespace Dystcz\LunarApiProductNotification;
 
-use Dystcz\LunarProductNotification\Domain\ProductNotifications\Models\ProductNotification;
-use Dystcz\LunarProductNotification\Domain\ProductNotifications\Observers\ProductVariantObserver;
-use Dystcz\LunarProductNotification\Domain\ProductNotifications\Policies\ProductNotificationPolicy;
-use Dystcz\LunarReviews\Domain\Reviews\Models\Review;
+use Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Models\ProductNotification;
+use Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Observers\ProductVariantObserver;
+use Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Policies\ProductNotificationPolicy;
 use Illuminate\Support\ServiceProvider;
-use Lunar\Models\Product;
 use Lunar\Models\ProductVariant;
 
-class LunarProductNotificationServiceProvider extends ServiceProvider
+class LunarApiProductNotificationServiceProvider extends ServiceProvider
 {
     protected $policies = [
         ProductNotification::class => ProductNotificationPolicy::class,
@@ -30,7 +28,7 @@ class LunarProductNotificationServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../config/lunar-product-notifications.php' => config_path('lunar-product-notifications.php'),
+                __DIR__.'/../config/lunar-api-product-notifications.php' => config_path('lunar-api-product-notifications.php'),
             ], 'config');
         }
     }
@@ -41,7 +39,7 @@ class LunarProductNotificationServiceProvider extends ServiceProvider
     public function register()
     {
         // Automatically apply the package configuration
-        $this->mergeConfigFrom(__DIR__.'/../config/lunar-product-notifications.php', 'lunar-product-notifications');
+        $this->mergeConfigFrom(__DIR__.'/../config/lunar-api-product-notifications.php', 'lunar-api-product-notifications');
     }
 
     protected function registerDynamicRelations(): void

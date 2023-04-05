@@ -1,8 +1,8 @@
 <?php
 
-namespace Dystcz\LunarProductNotification\Tests\Stubs\ProductVariants;
+namespace Dystcz\LunarApiProductNotification\Tests\Stubs\ProductVariants;
 
-use Dystcz\LunarProductNotification\Controller;
+use Dystcz\LunarApi\Controller;
 use LaravelJsonApi\Laravel\Http\Controllers\Actions\FetchRelated;
 
 class VariantsController extends Controller

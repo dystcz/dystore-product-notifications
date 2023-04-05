@@ -1,6 +1,6 @@
 <?php
 
-namespace Dystcz\LunarProductNotification\Domain\ProductNotifications\JsonApi\V1;
+namespace Dystcz\LunarApiProductNotification\Domain\ProductNotifications\JsonApi\V1;
 
 use Illuminate\Validation\Rule;
 use LaravelJsonApi\Laravel\Http\Requests\ResourceRequest;

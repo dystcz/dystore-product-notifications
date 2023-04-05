@@ -1,6 +1,6 @@
 <?php
 
-namespace Dystcz\LunarProductNotification\Domain\ProductNotifications\Models;
+namespace Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -26,8 +26,6 @@ class ProductNotification extends BaseModel
 
     /**
      * Purchasable relation.
-     *
-     * @return MorphTo
      */
     public function purchasable(): MorphTo
     {

@@ -15,13 +15,13 @@ return [
     // Configuration for specific domains
     'domains' => [
         'product-notifications' => [
-            'model' => Dystcz\LunarProductNotification\Domain\ProductNotifications\Models\ProductNotification::class,
+            'model' => Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Models\ProductNotification::class,
 
             // Route groups which get registered
             // If you want to change the behaviour or add some data,
             // simply extend the package product groups and add your logic
             'route_groups' => [
-                'product-notifications' => Dystcz\LunarProductNotification\Domain\ProductNotifications\Http\Routing\ProductNotificationRouteGroup::class,
+                'product-notifications' => Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Http\Routing\ProductNotificationRouteGroup::class,
             ],
         ],
     ],

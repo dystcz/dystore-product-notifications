@@ -1,6 +1,6 @@
 <?php
 
-namespace Dystcz\LunarProductNotification\Tests\Stubs\Users;
+namespace Dystcz\LunarApiProductNotification\Tests\Stubs\Users;
 
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Schema;

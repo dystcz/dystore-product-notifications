@@ -1,12 +1,12 @@
 <?php
 
-namespace Dystcz\LunarProductNotification\Tests;
+namespace Dystcz\LunarApiProductNotification\Tests;
 
 use Cartalyst\Converter\Laravel\ConverterServiceProvider;
 use Dystcz\LunarApi\LunarApiServiceProvider;
-use Dystcz\LunarProductNotification\LunarProductNotificationServiceProvider;
-use Dystcz\LunarProductNotification\Tests\Stubs\JsonApi\Server;
-use Dystcz\LunarProductNotification\Tests\Stubs\Users\User;
+use Dystcz\LunarApiProductNotification\LunarApiProductNotificationServiceProvider;
+use Dystcz\LunarApiProductNotification\Tests\Stubs\JsonApi\Server;
+use Dystcz\LunarApiProductNotification\Tests\Stubs\Users\User;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\Application;
 use Kalnoy\Nestedset\NestedSetServiceProvider;
@@ -19,7 +19,6 @@ use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\Activitylog\ActivitylogServiceProvider;
 use Spatie\LaravelBlink\BlinkServiceProvider;
 use Spatie\MediaLibrary\MediaLibraryServiceProvider;
-use function Orchestra\Testbench\artisan;
 
 abstract class TestCase extends Orchestra
 {
@@ -40,7 +39,7 @@ abstract class TestCase extends Orchestra
     }
 
     /**
-     * @param Application $app
+     * @param  Application  $app
      * @return array
      */
     protected function getPackageProviders($app)
@@ -49,7 +48,7 @@ abstract class TestCase extends Orchestra
 
         return [
             // Lunar Product Notification
-            LunarProductNotificationServiceProvider::class,
+            LunarApiProductNotificationServiceProvider::class,
 
             // Laravel JsonApi
             \LaravelJsonApi\Encoder\Neomerx\ServiceProvider::class,
@@ -70,7 +69,7 @@ abstract class TestCase extends Orchestra
     }
 
     /**
-     * @param Application $app
+     * @param  Application  $app
      */
     public function getEnvironmentSetUp($app)
     {
@@ -95,8 +94,6 @@ abstract class TestCase extends Orchestra
 
     /**
      * Define database migrations.
-     *
-     * @return void
      */
     protected function defineDatabaseMigrations(): void
     {

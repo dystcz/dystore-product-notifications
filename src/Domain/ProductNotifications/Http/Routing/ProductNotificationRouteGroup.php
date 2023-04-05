@@ -1,9 +1,9 @@
 <?php
 
-namespace Dystcz\LunarProductNotification\Domain\ProductNotifications\Http\Routing;
+namespace Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Http\Routing;
 
 use Dystcz\LunarApi\Routing\RouteGroup;
-use Dystcz\LunarProductNotification\Domain\ProductNotifications\Http\Controllers\ProductNotificationsController;
+use Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Http\Controllers\ProductNotificationsController;
 use LaravelJsonApi\Laravel\Facades\JsonApiRoute;
 
 class ProductNotificationRouteGroup extends RouteGroup
