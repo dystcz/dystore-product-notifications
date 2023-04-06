@@ -6,6 +6,7 @@
         "laravel",
         "php",
         "lunar",
+        "lunar-api",
         "lunar-api-product-notifications"
     ],
     "homepage": "https://github.com/dystcz/lunar-api-product-notifications",
