@@ -2,23 +2,16 @@
 
 namespace Dystcz\LunarApiProductNotification\Tests;
 
-use Cartalyst\Converter\Laravel\ConverterServiceProvider;
-use Dystcz\LunarApi\LunarApiServiceProvider;
 use Dystcz\LunarApiProductNotification\LunarApiProductNotificationServiceProvider;
 use Dystcz\LunarApiProductNotification\Tests\Stubs\JsonApi\Server;
 use Dystcz\LunarApiProductNotification\Tests\Stubs\Users\User;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\Application;
-use Kalnoy\Nestedset\NestedSetServiceProvider;
-use LaravelJsonApi\Spec\ServiceProvider;
+use Illuminate\Support\Facades\Config;
 use LaravelJsonApi\Testing\MakesJsonApiRequests;
 use LaravelJsonApi\Testing\TestExceptionHandler;
 use Lunar\Database\Factories\LanguageFactory;
-use Lunar\LunarServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Spatie\Activitylog\ActivitylogServiceProvider;
-use Spatie\LaravelBlink\BlinkServiceProvider;
-use Spatie\MediaLibrary\MediaLibraryServiceProvider;
 
 abstract class TestCase extends Orchestra
 {
@@ -33,7 +26,7 @@ abstract class TestCase extends Orchestra
             'name' => 'English',
         ]);
 
-        config()->set('auth.providers.users.model', User::class);
+        Config::set('auth.providers.users.model', User::class);
 
         activity()->disableLogging();
     }
@@ -44,7 +37,7 @@ abstract class TestCase extends Orchestra
      */
     protected function getPackageProviders($app)
     {
-        config()->set('lunar-api.additional_servers', [Server::class]);
+        Config::set('lunar-api.additional_servers', [Server::class]);
 
         return [
             // Lunar Product Notification
@@ -53,18 +46,18 @@ abstract class TestCase extends Orchestra
             // Laravel JsonApi
             \LaravelJsonApi\Encoder\Neomerx\ServiceProvider::class,
             \LaravelJsonApi\Laravel\ServiceProvider::class,
-            ServiceProvider::class,
+            \LaravelJsonApi\Spec\ServiceProvider::class,
 
             // Lunar Api
-            LunarApiServiceProvider::class,
+            \Dystcz\LunarApi\LunarApiServiceProvider::class,
 
             // Lunar core
-            LunarServiceProvider::class,
-            MediaLibraryServiceProvider::class,
-            ActivitylogServiceProvider::class,
-            ConverterServiceProvider::class,
-            NestedSetServiceProvider::class,
-            BlinkServiceProvider::class,
+            \Lunar\LunarServiceProvider::class,
+            \Spatie\MediaLibrary\MediaLibraryServiceProvider::class,
+            \Spatie\Activitylog\ActivitylogServiceProvider::class,
+            \Cartalyst\Converter\Laravel\ConverterServiceProvider::class,
+            \Kalnoy\Nestedset\NestedSetServiceProvider::class,
+            \Spatie\LaravelBlink\BlinkServiceProvider::class,
         ];
     }
 
@@ -73,11 +66,11 @@ abstract class TestCase extends Orchestra
      */
     public function getEnvironmentSetUp($app)
     {
-        config()->set('database.default', 'sqlite');
+        Config::set('database.default', 'sqlite');
 
-        config()->set('database.migrations', 'migrations');
+        Config::set('database.migrations', 'migrations');
 
-        config()->set('database.connections.sqlite', [
+        Config::set('database.connections.sqlite', [
             'driver' => 'sqlite',
             'database' => ':memory:',
             'prefix' => '',
