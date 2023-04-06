@@ -1,5 +1,6 @@
 /vendor
 composer.phar
+composer.json
 .DS_Store
 /.idea
 .phpunit.result.cache
@@ -8,3 +9,4 @@ composer.phar
 Session.vim
 phpstan.neon
 ray.php
+_ide_helper.php
