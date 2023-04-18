@@ -1,6 +1,7 @@
 /vendor
 composer.phar
 composer.json
+composer.lock
 .DS_Store
 /.idea
 .phpunit.result.cache
