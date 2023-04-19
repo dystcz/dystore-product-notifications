@@ -11,8 +11,6 @@ class Server extends BaseServer
 {
     /**
      * Get the server's list of schemas.
-     *
-     * @return array
      */
     protected function allSchemas(): array
     {

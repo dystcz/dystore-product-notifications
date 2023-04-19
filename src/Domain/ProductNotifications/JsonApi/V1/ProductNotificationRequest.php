@@ -4,14 +4,11 @@ namespace Dystcz\LunarApiProductNotification\Domain\ProductNotifications\JsonApi
 
 use Illuminate\Validation\Rule;
 use LaravelJsonApi\Laravel\Http\Requests\ResourceRequest;
-use LaravelJsonApi\Validation\Rule as JsonApiRule;
 
 class ProductNotificationRequest extends ResourceRequest
 {
     /**
      * Get the validation rules for the resource.
-     *
-     * @return array
      */
     public function rules(): array
     {
@@ -19,17 +16,16 @@ class ProductNotificationRequest extends ResourceRequest
 
         return [
             'email' => [
-                'required', 
-                'email', 
+                'required',
+                'email',
                 Rule::unique(config('lunar.database.table_prefix').'product_notifications')
-                    ->where(fn ($query) =>
-                        $query->where([
-                            ['email', $attributes['email']],
-                            ['purchasable_id', $attributes['purchasable_id']],
-                            ['purchasable_type', $attributes['purchasable_type']],
-                            ['sent_at', null],
-                        ])
-                    )
+                    ->where(fn ($query) => $query->where([
+                        ['email', $attributes['email']],
+                        ['purchasable_id', $attributes['purchasable_id']],
+                        ['purchasable_type', $attributes['purchasable_type']],
+                        ['sent_at', null],
+                    ])
+                    ),
             ],
             'purchasable_id' => ['required', 'integer'],
             'purchasable_type' => ['required', 'string'],
@@ -43,4 +39,3 @@ class ProductNotificationRequest extends ResourceRequest
         ];
     }
 }
-

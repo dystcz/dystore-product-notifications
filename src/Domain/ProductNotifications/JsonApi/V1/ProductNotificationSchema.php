@@ -12,15 +12,11 @@ class ProductNotificationSchema extends Schema
 {
     /**
      * The model the schema corresponds to.
-     *
-     * @var string
      */
     public static string $model = ProductNotification::class;
 
     /**
      * Get the resource fields.
-     *
-     * @return array
      */
     public function fields(): array
     {
@@ -36,8 +32,6 @@ class ProductNotificationSchema extends Schema
 
     /**
      * Get the JSON:API resource type.
-     *
-     * @return string
      */
     public static function type(): string
     {
