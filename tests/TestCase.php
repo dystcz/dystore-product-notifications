@@ -2,7 +2,6 @@
 
 namespace Dystcz\LunarApiProductNotification\Tests;
 
-use Dystcz\LunarApiProductNotification\LunarApiProductNotificationServiceProvider;
 use Dystcz\LunarApiProductNotification\Tests\Stubs\JsonApi\Server;
 use Dystcz\LunarApiProductNotification\Tests\Stubs\Users\User;
 use Illuminate\Contracts\Debug\ExceptionHandler;
@@ -33,16 +32,15 @@ abstract class TestCase extends Orchestra
 
     /**
      * @param  Application  $app
-     * @return array
      */
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
-        Config::set('lunar-api.additional_servers', [Server::class]);
+        Config::set(
+            'lunar-api.additional_servers',
+            [Server::class],
+        );
 
         return [
-            // Lunar Product Notification
-            LunarApiProductNotificationServiceProvider::class,
-
             // Laravel JsonApi
             \LaravelJsonApi\Encoder\Neomerx\ServiceProvider::class,
             \LaravelJsonApi\Laravel\ServiceProvider::class,
@@ -50,6 +48,7 @@ abstract class TestCase extends Orchestra
 
             // Lunar Api
             \Dystcz\LunarApi\LunarApiServiceProvider::class,
+            \Dystcz\LunarApi\JsonApiServiceProvider::class,
 
             // Lunar core
             \Lunar\LunarServiceProvider::class,
@@ -58,13 +57,16 @@ abstract class TestCase extends Orchestra
             \Cartalyst\Converter\Laravel\ConverterServiceProvider::class,
             \Kalnoy\Nestedset\NestedSetServiceProvider::class,
             \Spatie\LaravelBlink\BlinkServiceProvider::class,
+
+            // Lunar Product Notification
+            \Dystcz\LunarApiProductNotification\LunarApiProductNotificationServiceProvider::class,
         ];
     }
 
     /**
      * @param  Application  $app
      */
-    public function getEnvironmentSetUp($app)
+    public function getEnvironmentSetUp($app): void
     {
         Config::set('database.default', 'sqlite');
 
