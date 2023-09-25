@@ -4,6 +4,7 @@ use Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Factories\Pro
 use Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Notifications\ProductRestockedNotification;
 use Dystcz\LunarApiProductNotification\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Notification;
 use Lunar\Database\Factories\ProductVariantFactory;
 
 uses(TestCase::class, RefreshDatabase::class);
