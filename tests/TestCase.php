@@ -3,6 +3,7 @@
 namespace Dystcz\LunarProductNotification\Tests;
 
 use Cartalyst\Converter\Laravel\ConverterServiceProvider;
+use Dystcz\LunarApi\JsonApiServiceProvider;
 use Dystcz\LunarApi\LunarApiServiceProvider;
 use Dystcz\LunarProductNotification\LunarProductNotificationServiceProvider;
 use Dystcz\LunarProductNotification\Tests\Stubs\JsonApi\Server;
@@ -57,6 +58,7 @@ abstract class TestCase extends Orchestra
 
             // Lunar Api
             LunarApiServiceProvider::class,
+            JsonApiServiceProvider::class,
 
             // Lunar core
             LunarServiceProvider::class,

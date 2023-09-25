@@ -29,7 +29,7 @@ class ProductNotificationPolicy
     /**
      * Determine if the given user can create posts.
      */
-    public function create(Authenticatable $user): bool
+    public function create(?Authenticatable $user): bool
     {
         return true;
     }

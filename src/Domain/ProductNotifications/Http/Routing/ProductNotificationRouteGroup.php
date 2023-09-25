@@ -4,14 +4,11 @@ namespace Dystcz\LunarProductNotification\Domain\ProductNotifications\Http\Routi
 
 use Dystcz\LunarApi\Routing\RouteGroup;
 use Dystcz\LunarProductNotification\Domain\ProductNotifications\Http\Controllers\ProductNotificationsController;
+use Dystcz\LunarProductNotification\Domain\ProductNotifications\JsonApi\V1\ProductNotificationSchema;
 use LaravelJsonApi\Laravel\Facades\JsonApiRoute;
 
 class ProductNotificationRouteGroup extends RouteGroup
 {
-    public string $prefix = 'product-notifications';
-
-    public array $middleware = [];
-
     /**
      * Register routes.
      */
@@ -20,7 +17,7 @@ class ProductNotificationRouteGroup extends RouteGroup
         JsonApiRoute::server('v1')
             ->prefix('v1')
             ->resources(function ($server) {
-                $server->resource($this->getPrefix(), ProductNotificationsController::class)
+                $server->resource(ProductNotificationSchema::type(), ProductNotificationsController::class)
                     ->only('store');
             });
     }

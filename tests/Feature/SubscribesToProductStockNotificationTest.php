@@ -7,7 +7,7 @@ use Dystcz\LunarProductNotification\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Lunar\Database\Factories\ProductVariantFactory;
 
-use function Pest\Faker\faker;
+use function Pest\Faker\fake;
 
 uses(TestCase::class, RefreshDatabase::class);
 
@@ -19,7 +19,7 @@ test('user can subscribe to product stock notification', function () {
     $data = [
         'type' => 'product-notifications',
         'attributes' => [
-            'email' => $email = faker()->email,
+            'email' => $email = fake()->email,
             'purchasable_id' => $productVariant->id,
             'purchasable_type' => $productVariant::class,
         ],
@@ -81,7 +81,6 @@ it('doesnt accept duplicate emails', function () {
 });
 
 test('user can subscribe again to the same product when previously notified', function () {
-
     $this->actingAs(User::factory()->create());
 
     $notification = ProductNotificationFactory::new()
@@ -110,4 +109,37 @@ test('user can subscribe again to the same product when previously notified', fu
     $response
         ->assertCreatedWithServerId('http://localhost/api/v1/product-notifications', $data)
         ->id();
+});
+
+test('unauthenticated user can subscribe to product stock notification', function () {
+    $productVariant = ProductVariantFactory::new()->create();
+
+    $data = [
+        'type' => 'product-notifications',
+        'attributes' => [
+            'email' => $email = fake()->email,
+            'purchasable_id' => $productVariant->id,
+            'purchasable_type' => $productVariant::class,
+        ],
+    ];
+
+    $response = $this
+        ->jsonApi()
+        ->expects('product-notifications')
+        ->withData($data)
+        ->post('/api/v1/product-notifications');
+
+    $id = $response
+        ->assertCreatedWithServerId('http://localhost/api/v1/product-notifications', $data)
+        ->id();
+
+    $this->assertDatabaseHas(
+        (new ProductNotification())->getTable(),
+        [
+            'id' => $id,
+            'purchasable_id' => $productVariant->id,
+            'purchasable_type' => $productVariant::class,
+            'email' => $email,
+        ]
+    );
 });
