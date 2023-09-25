@@ -6,6 +6,7 @@ use Dystcz\LunarProductNotification\Tests\Stubs\Users\User;
 use Dystcz\LunarProductNotification\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Lunar\Database\Factories\ProductVariantFactory;
+
 use function Pest\Faker\faker;
 
 uses(TestCase::class, RefreshDatabase::class);

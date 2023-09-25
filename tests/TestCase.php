@@ -19,7 +19,6 @@ use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\Activitylog\ActivitylogServiceProvider;
 use Spatie\LaravelBlink\BlinkServiceProvider;
 use Spatie\MediaLibrary\MediaLibraryServiceProvider;
-use function Orchestra\Testbench\artisan;
 
 abstract class TestCase extends Orchestra
 {
@@ -40,7 +39,7 @@ abstract class TestCase extends Orchestra
     }
 
     /**
-     * @param Application $app
+     * @param  Application  $app
      * @return array
      */
     protected function getPackageProviders($app)
@@ -70,7 +69,7 @@ abstract class TestCase extends Orchestra
     }
 
     /**
-     * @param Application $app
+     * @param  Application  $app
      */
     public function getEnvironmentSetUp($app)
     {
@@ -95,8 +94,6 @@ abstract class TestCase extends Orchestra
 
     /**
      * Define database migrations.
-     *
-     * @return void
      */
     protected function defineDatabaseMigrations(): void
     {

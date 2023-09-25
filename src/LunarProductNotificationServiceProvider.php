@@ -5,9 +5,7 @@ namespace Dystcz\LunarProductNotification;
 use Dystcz\LunarProductNotification\Domain\ProductNotifications\Models\ProductNotification;
 use Dystcz\LunarProductNotification\Domain\ProductNotifications\Observers\ProductVariantObserver;
 use Dystcz\LunarProductNotification\Domain\ProductNotifications\Policies\ProductNotificationPolicy;
-use Dystcz\LunarReviews\Domain\Reviews\Models\Review;
 use Illuminate\Support\ServiceProvider;
-use Lunar\Models\Product;
 use Lunar\Models\ProductVariant;
 
 class LunarProductNotificationServiceProvider extends ServiceProvider

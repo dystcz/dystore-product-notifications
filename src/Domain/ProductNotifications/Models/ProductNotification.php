@@ -26,8 +26,6 @@ class ProductNotification extends BaseModel
 
     /**
      * Purchasable relation.
-     *
-     * @return MorphTo
      */
     public function purchasable(): MorphTo
     {

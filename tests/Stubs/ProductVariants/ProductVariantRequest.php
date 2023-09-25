@@ -9,8 +9,6 @@ class ProductVariantRequest extends ResourceRequest
 {
     /**
      * Get the validation rules for the resource.
-     *
-     * @return array
      */
     public function rules(): array
     {
