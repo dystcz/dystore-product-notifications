@@ -8,3 +8,4 @@ composer.phar
 Session.vim
 phpstan.neon
 ray.php
+.lando.yml
