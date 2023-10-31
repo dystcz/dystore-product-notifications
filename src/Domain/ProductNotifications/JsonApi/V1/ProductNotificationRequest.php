@@ -9,6 +9,8 @@ class ProductNotificationRequest extends ResourceRequest
 {
     /**
      * Get the validation rules for the resource.
+     *
+     * @return array<string,array<int,mixed>>
      */
     public function rules(): array
     {
@@ -32,10 +34,17 @@ class ProductNotificationRequest extends ResourceRequest
         ];
     }
 
-    public function messages()
+    /**
+     * Get custom messages for validator errors.
+     *
+     * @return array<string,string>
+     */
+    public function messages(): array
     {
         return [
-            'email.unique' => 'Already subscribed to this product',
+            'email.required' => __('lunar-api-product-notifications::validations.store_product_notification.email.required'),
+            'email.email' => __('lunar-api-product-notifications::validations.store_product_notification.email.email'),
+            'email.unique' => __('lunar-api-product-notifications::validations.store_product_notification.email.unique'),
         ];
     }
 }
