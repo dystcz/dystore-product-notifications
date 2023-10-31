@@ -74,7 +74,7 @@ it('doesnt accept duplicate emails', function () {
     $expected = [
         'source' => ['pointer' => '/data/attributes/email'],
         'status' => '422',
-        'detail' => 'Already subscribed to this product',
+        'detail' => __('lunar-api-product-notifications::validations.store_product_notification.email.unique'),
     ];
 
     $response->assertError(422, $expected);
