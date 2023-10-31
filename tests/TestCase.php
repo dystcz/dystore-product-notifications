@@ -48,14 +48,6 @@ abstract class TestCase extends Orchestra
             \LaravelJsonApi\Laravel\ServiceProvider::class,
             \LaravelJsonApi\Spec\ServiceProvider::class,
 
-            // Lunar Api
-            \Dystcz\LunarApi\LunarApiServiceProvider::class,
-            \Dystcz\LunarApi\JsonApiServiceProvider::class,
-
-            // Hashids
-            \Vinkla\Hashids\HashidsServiceProvider::class,
-            \Dystcz\LunarApi\LunarApiHashidsServiceProvider::class,
-
             // Lunar core
             \Lunar\LunarServiceProvider::class,
             \Spatie\MediaLibrary\MediaLibraryServiceProvider::class,
@@ -63,6 +55,14 @@ abstract class TestCase extends Orchestra
             \Cartalyst\Converter\Laravel\ConverterServiceProvider::class,
             \Kalnoy\Nestedset\NestedSetServiceProvider::class,
             \Spatie\LaravelBlink\BlinkServiceProvider::class,
+
+            // Lunar Api
+            \Dystcz\LunarApi\LunarApiServiceProvider::class,
+            \Dystcz\LunarApi\JsonApiServiceProvider::class,
+
+            // Hashids
+            \Vinkla\Hashids\HashidsServiceProvider::class,
+            \Dystcz\LunarApi\LunarApiHashidsServiceProvider::class,
 
             // Lunar Product Notification
             \Dystcz\LunarApiProductNotification\LunarApiProductNotificationServiceProvider::class,
