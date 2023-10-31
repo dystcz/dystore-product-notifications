@@ -24,6 +24,10 @@ class LunarApiProductNotificationServiceProvider extends ServiceProvider
 
         $this->registerSchemas();
 
+        $this->booting(function () {
+            $this->registerPolicies();
+        });
+
         $this->loadTranslationsFrom(
             "{$this->root}/lang",
             'lunar-api-product-notifications',
