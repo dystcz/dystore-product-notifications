@@ -112,7 +112,7 @@ class LunarApiProductNotificationServiceProvider extends ServiceProvider
      */
     public function registerPolicies(): void
     {
-        DomainConfigCollection::fromConfig('lunar-api-product-notifications.domains')
+        DomainConfigCollection::fromConfig('lunar-api.product-notifications.domains')
             ->getPolicies()
             ->each(
                 fn (string $policy, string $model) => Gate::policy($model, $policy),
