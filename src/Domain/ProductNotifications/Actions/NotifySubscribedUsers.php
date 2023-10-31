@@ -10,7 +10,11 @@ class NotifySubscribedUsers
 {
     public function handle(ProductVariant $productVariant): void
     {
-        $notifiables = $productVariant->notifications()->unsent()->get();
+        /** @var \Dystcz\LunarApi\Domain\ProductVariants\Models\ProductVariant $productVariant */
+        $notifiables = $productVariant
+            ->notifications()
+            ->unsent()
+            ->get();
 
         Notification::send(
             $notifiables,

@@ -2,10 +2,10 @@
 
 namespace Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Http\Controllers;
 
-use Dystcz\LunarApi\Controller;
-use LaravelJsonApi\Laravel\Http\Controllers\Actions;
+use Dystcz\LunarApi\Base\Controller;
+use LaravelJsonApi\Laravel\Http\Controllers\Actions\Store;
 
 class ProductNotificationsController extends Controller
 {
-    use Actions\Store;
+    use Store;
 }

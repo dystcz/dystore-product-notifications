@@ -2,13 +2,19 @@
 
 namespace Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Models;
 
-use Illuminate\Database\Eloquent\Builder;
+use Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Builders\ProductNotificationBuilder;
+use Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Factories\ProductNotificationFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Notifications\Notifiable;
 use Lunar\Base\BaseModel;
 
+/**
+ * @method static ProductNotificationBuilder query()
+ */
 class ProductNotification extends BaseModel
 {
+    use HasFactory;
     use Notifiable;
 
     protected $fillable = [
@@ -25,15 +31,29 @@ class ProductNotification extends BaseModel
     ];
 
     /**
+     * Create a new factory instance for the model.
+     */
+    protected static function newFactory(): ProductNotificationFactory
+    {
+        return ProductNotificationFactory::new();
+    }
+
+    /**
+     * Create a new Eloquent query builder for the model.
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query
+     * @return ProductNotificationBuilder|static
+     */
+    public function newEloquentBuilder($query): ProductNotificationBuilder
+    {
+        return new ProductNotificationBuilder($query);
+    }
+
+    /**
      * Purchasable relation.
      */
     public function purchasable(): MorphTo
     {
         return $this->morphTo();
-    }
-
-    public function scopeUnsent(Builder $query): Builder
-    {
-        return $query->whereNull('sent_at');
     }
 }

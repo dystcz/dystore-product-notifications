@@ -1,18 +1,21 @@
 <?php
 
+use Dystcz\LunarApi\Domain\ProductVariants\Models\ProductVariant;
 use Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Factories\ProductNotificationFactory;
+use Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Models\ProductNotification;
 use Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Notifications\ProductRestockedNotification;
 use Dystcz\LunarApiProductNotification\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
-use Lunar\Database\Factories\ProductVariantFactory;
 
 uses(TestCase::class, RefreshDatabase::class);
 
 it('notifies user on product stock change', function () {
-    $notification = ProductNotificationFactory::new()
+
+    /** @var TestCase $this */
+    $notification = ProductNotification::factory()
         ->for(
-            ProductVariantFactory::new()->state(['stock' => 0]),
+            ProductVariant::factory()->state(['stock' => 0]),
             'purchasable'
         )
         ->create();
@@ -33,9 +36,10 @@ it('notifies user on product stock change', function () {
 });
 
 it('notifies the user only once', function () {
+    /** @var TestCase $this */
     $notification = ProductNotificationFactory::new()
         ->for(
-            ProductVariantFactory::new()->state(['stock' => 0]),
+            ProductVariant::factory()->state(['stock' => 0]),
             'purchasable'
         )
         ->create(['sent_at' => now()]);

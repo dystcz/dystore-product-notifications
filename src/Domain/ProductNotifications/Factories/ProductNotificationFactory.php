@@ -4,7 +4,11 @@ namespace Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Factori
 
 use Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Models\ProductNotification;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @extends Factory<Model>
+ */
 class ProductNotificationFactory extends Factory
 {
     protected $model = ProductNotification::class;
