@@ -13,32 +13,68 @@ use Lunar\Models\ProductVariant;
 
 class LunarApiProductNotificationServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap the application services.
-     */
-    public function boot(): void
-    {
-        $this->registerSchemas();
-        $this->registerObservers();
-        $this->registerDynamicRelations();
-
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
-
-        if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__.'/../config/lunar-api-product-notifications.php' => config_path('lunar-api-product-notifications.php'),
-            ], 'config');
-        }
-    }
+    protected $root = __DIR__.'/..';
 
     /**
      * Register the application services.
      */
     public function register(): void
     {
-        // Automatically apply the package configuration
-        $this->mergeConfigFrom(__DIR__.'/../config/lunar-api-product-notifications.php', 'lunar-api-product-notifications');
+        $this->registerConfig();
+
+        $this->registerSchemas();
+
+        $this->loadTranslationsFrom(
+            "{$this->root}/lang",
+            'lunar-api-product-notifications',
+        );
+    }
+
+    /**
+     * Bootstrap the application services.
+     */
+    public function boot(): void
+    {
+        $this->registerObservers();
+        $this->registerDynamicRelations();
+
+        $this->loadMigrationsFrom("{$this->root}/database/migrations");
+        $this->loadRoutesFrom("{$this->root}/routes/api.php");
+
+        if ($this->app->runningInConsole()) {
+            $this->publishConfig();
+        }
+    }
+
+    /**
+     * Register config files.
+     */
+    protected function registerConfig(): void
+    {
+        $this->mergeConfigFrom(
+            "{$this->root}/config/product-notifications.php",
+            'lunar-api.product-notifications',
+        );
+    }
+
+    /**
+     * Publish config files.
+     */
+    protected function publishConfig(): void
+    {
+        $this->publishes([
+            "{$this->root}/config/product-notifications.php" => config_path('lunar-api.product-notifications.php'),
+        ], 'lunar-api-product-notifications');
+    }
+
+    /**
+     * Publish translations.
+     */
+    protected function publishTranslations(): void
+    {
+        $this->publishes([
+            "{$this->root}/lang" => $this->app->langPath('vendor/lunar-api-product-notifications'),
+        ], 'lunar-api.translations');
     }
 
     /**
