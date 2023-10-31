@@ -3,7 +3,6 @@
 namespace Dystcz\LunarApiProductNotification\Tests;
 
 use Dystcz\LunarApi\Base\Facades\SchemaManifestFacade;
-use Dystcz\LunarApiProductNotification\Domain\ProductNotifications\JsonApi\V1\ProductNotificationSchema;
 use Dystcz\LunarApiProductNotification\Tests\Stubs\Users\User;
 use Dystcz\LunarApiProductNotification\Tests\Stubs\Users\UserSchema;
 use Illuminate\Contracts\Debug\ExceptionHandler;
@@ -90,7 +89,6 @@ abstract class TestCase extends Orchestra
          * Schema configuration.
          */
         SchemaManifestFacade::registerSchema(UserSchema::class);
-        SchemaManifestFacade::registerSchema(ProductNotificationSchema::class);
     }
 
     /**
