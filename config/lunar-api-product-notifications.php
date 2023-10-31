@@ -1,28 +1,22 @@
 <?php
 
 /*
- * You can place your custom package configuration in here.
+ * Lunar API Product Notifications configuration
  */
 return [
-
-    // Prefix for all the API routes
-    // Leave empty if you don't want to use a prefix
-    'route_prefix' => 'api',
-
-    // Middleware for all the API routes
-    'route_middleware' => ['api'],
-
     // Configuration for specific domains
     'domains' => [
-        'product-notifications' => [
+        'product_notifications' => [
+            'model' => Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Models\ProductNotification::class,
+            'lunar_model' => null,
+            'policy' => Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Policies\ProductNotificationPolicy::class,
             'schema' => Dystcz\LunarApiProductNotification\Domain\ProductNotifications\JsonApi\V1\ProductNotificationSchema::class,
-
-            // Route groups which get registered
-            // If you want to change the behaviour or add some data,
-            // simply extend the package product groups and add your logic
-            'route_groups' => [
-                Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Http\Routing\ProductNotificationRouteGroup::class,
-            ],
+            'resource' => Dystcz\LunarApiProductNotification\Domain\ProductNotifications\JsonApi\V1\ProductNotificationResource::class,
+            'query' => Dystcz\LunarApiProductNotification\Domain\ProductNotifications\JsonApi\V1\ProductNotificationQuery::class,
+            'collection_query' => Dystcz\LunarApiProductNotification\Domain\ProductNotifications\JsonApi\V1\ProductNotificationCollectionQuery::class,
+            'routes' => Dystcz\LunarApiProductNotification\Domain\ProductNotifications\Http\Routing\ProductNotificationRouteGroup::class,
+            'route_actions' => [],
+            'settings' => [],
         ],
     ],
 ];
