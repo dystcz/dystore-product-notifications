@@ -12,12 +12,13 @@ use function Pest\Faker\fake;
 uses(TestCase::class, RefreshDatabase::class);
 
 test('user can subscribe to product stock notification', function () {
+    /** @var TestCase $this */
     $productVariant = ProductVariantFactory::new()->create();
 
     $this->actingAs(User::factory()->create());
 
     $data = [
-        'type' => 'product-notifications',
+        'type' => 'product_notifications',
         'attributes' => [
             'email' => $email = fake()->email,
             'purchasable_id' => $productVariant->id,
@@ -27,16 +28,16 @@ test('user can subscribe to product stock notification', function () {
 
     $response = $this
         ->jsonApi()
-        ->expects('product-notifications')
+        ->expects('product_notifications')
         ->withData($data)
-        ->post('/api/v1/product-notifications');
+        ->post('/api/v1/product_notifications');
 
     $id = $response
-        ->assertCreatedWithServerId('http://localhost/api/v1/product-notifications', $data)
+        ->assertCreatedWithServerId('http://localhost/api/v1/product_notifications', $data)
         ->id();
 
     $this->assertDatabaseHas(
-        (new ProductNotification())->getTable(),
+        (new ProductNotification)->getTable(),
         [
             'id' => $id,
             'purchasable_id' => $productVariant->id,
@@ -47,6 +48,7 @@ test('user can subscribe to product stock notification', function () {
 });
 
 it('doesnt accept duplicate emails', function () {
+    /** @var TestCase $this */
     $this->actingAs(User::factory()->create());
 
     $notification = ProductNotificationFactory::new()
@@ -57,7 +59,7 @@ it('doesnt accept duplicate emails', function () {
         ->create();
 
     $data = [
-        'type' => 'product-notifications',
+        'type' => 'product_notifications',
         'attributes' => [
             'email' => $notification->email,
             'purchasable_id' => $notification->purchasable_id,
@@ -67,9 +69,9 @@ it('doesnt accept duplicate emails', function () {
 
     $response = $this
         ->jsonApi()
-        ->expects('product-notifications')
+        ->expects('product_notifications')
         ->withData($data)
-        ->post('/api/v1/product-notifications');
+        ->post('/api/v1/product_notifications');
 
     $expected = [
         'source' => ['pointer' => '/data/attributes/email'],
@@ -81,7 +83,7 @@ it('doesnt accept duplicate emails', function () {
 });
 
 test('user can subscribe again to the same product when previously notified', function () {
-
+    /** @var TestCase $this */
     $this->actingAs(User::factory()->create());
 
     $notification = ProductNotificationFactory::new()
@@ -93,7 +95,7 @@ test('user can subscribe again to the same product when previously notified', fu
         ->create();
 
     $data = [
-        'type' => 'product-notifications',
+        'type' => 'product_notifications',
         'attributes' => [
             'email' => $notification->email,
             'purchasable_id' => $notification->purchasable_id,
@@ -103,20 +105,21 @@ test('user can subscribe again to the same product when previously notified', fu
 
     $response = $this
         ->jsonApi()
-        ->expects('product-notifications')
+        ->expects('product_notifications')
         ->withData($data)
-        ->post('/api/v1/product-notifications');
+        ->post('/api/v1/product_notifications');
 
     $response
-        ->assertCreatedWithServerId('http://localhost/api/v1/product-notifications', $data)
+        ->assertCreatedWithServerId('http://localhost/api/v1/product_notifications', $data)
         ->id();
 });
 
 test('unauthenticated user can subscribe to product stock notification', function () {
+    /** @var TestCase $this */
     $productVariant = ProductVariantFactory::new()->create();
 
     $data = [
-        'type' => 'product-notifications',
+        'type' => 'product_notifications',
         'attributes' => [
             'email' => $email = fake()->email,
             'purchasable_id' => $productVariant->id,
@@ -126,16 +129,16 @@ test('unauthenticated user can subscribe to product stock notification', functio
 
     $response = $this
         ->jsonApi()
-        ->expects('product-notifications')
+        ->expects('product_notifications')
         ->withData($data)
-        ->post('/api/v1/product-notifications');
+        ->post('/api/v1/product_notifications');
 
     $id = $response
-        ->assertCreatedWithServerId('http://localhost/api/v1/product-notifications', $data)
+        ->assertCreatedWithServerId('http://localhost/api/v1/product_notifications', $data)
         ->id();
 
     $this->assertDatabaseHas(
-        (new ProductNotification())->getTable(),
+        (new ProductNotification)->getTable(),
         [
             'id' => $id,
             'purchasable_id' => $productVariant->id,

@@ -5,17 +5,21 @@ namespace Dystcz\LunarApiProductNotification\Tests;
 use Dystcz\LunarApi\Base\Facades\SchemaManifestFacade;
 use Dystcz\LunarApiProductNotification\Tests\Stubs\Users\User;
 use Dystcz\LunarApiProductNotification\Tests\Stubs\Users\UserSchema;
+use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
 use Illuminate\Support\Facades\Config;
 use LaravelJsonApi\Testing\MakesJsonApiRequests;
 use LaravelJsonApi\Testing\TestExceptionHandler;
 use Lunar\Database\Factories\LanguageFactory;
+use Orchestra\Testbench\Concerns\WithWorkbench;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 abstract class TestCase extends Orchestra
 {
     use MakesJsonApiRequests;
+    use WithWorkbench;
 
     protected function setUp(): void
     {
@@ -30,6 +34,11 @@ abstract class TestCase extends Orchestra
             'driver' => 'eloquent',
             'model' => User::class,
         ]);
+
+        /**
+         * Schema configuration.
+         */
+        SchemaManifestFacade::registerSchema(UserSchema::class);
 
         activity()->disableLogging();
     }
@@ -56,6 +65,9 @@ abstract class TestCase extends Orchestra
             \Kalnoy\Nestedset\NestedSetServiceProvider::class,
             \Spatie\LaravelBlink\BlinkServiceProvider::class,
 
+            // Livewire
+            \Livewire\LivewireServiceProvider::class,
+
             // Lunar Api
             \Dystcz\LunarApi\LunarApiServiceProvider::class,
             \Dystcz\LunarApi\JsonApiServiceProvider::class,
@@ -72,23 +84,46 @@ abstract class TestCase extends Orchestra
     /**
      * @param  Application  $app
      */
-    public function getEnvironmentSetUp($app): void
+    protected function defineEnvironment($app): void
     {
-        /**
-         * App configuration.
-         */
-        Config::set('database.default', 'sqlite');
-        Config::set('database.migrations', 'migrations');
-        Config::set('database.connections.sqlite', [
-            'driver' => 'sqlite',
-            'database' => ':memory:',
-            'prefix' => '',
-        ]);
+        $app->useEnvironmentPath(__DIR__.'/..');
+        $app->bootstrapWith([LoadEnvironmentVariables::class]);
 
-        /**
-         * Schema configuration.
-         */
-        SchemaManifestFacade::registerSchema(UserSchema::class);
+        tap($app['config'], function (Repository $config) {
+            /**
+             * App configuration.
+             */
+            $config->set('auth.providers.users', [
+                'driver' => 'eloquent',
+                'model' => \Dystcz\LunarApiProductNotification\Tests\Stubs\Users\User::class,
+            ]);
+
+            $config->set('database.default', 'sqlite');
+            $config->set('database.migrations', 'migrations');
+            $config->set('database.connections.sqlite', [
+                'driver' => 'sqlite',
+                'database' => ':memory:',
+                'prefix' => '',
+            ]);
+
+            $config->set('database.connections.mysql', [
+                'driver' => 'mysql',
+                'host' => 'mysql',
+                'port' => '3306',
+                'database' => 'lunar-api-testing',
+                'username' => 'homestead',
+                'password' => 'secret',
+            ]);
+        });
+    }
+
+    /**
+     * Define database migrations.
+     */
+    protected function defineDatabaseMigrations(): void
+    {
+        $this->loadLaravelMigrations();
+        // $this->loadMigrationsFrom(workbench_path('database/migrations'));
     }
 
     /**
@@ -100,13 +135,5 @@ abstract class TestCase extends Orchestra
             ExceptionHandler::class,
             TestExceptionHandler::class
         );
-    }
-
-    /**
-     * Define database migrations.
-     */
-    protected function defineDatabaseMigrations(): void
-    {
-        $this->loadLaravelMigrations();
     }
 }
