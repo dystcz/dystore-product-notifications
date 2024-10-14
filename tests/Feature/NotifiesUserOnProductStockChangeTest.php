@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Notification;
 uses(TestCase::class, RefreshDatabase::class);
 
 it('notifies user on product stock change', function () {
-
     /** @var TestCase $this */
     $notification = ProductNotification::factory()
         ->for(

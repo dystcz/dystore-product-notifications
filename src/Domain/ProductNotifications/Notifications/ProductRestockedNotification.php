@@ -12,9 +12,7 @@ class ProductRestockedNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    public function __construct(public ProductVariant $productVariant)
-    {
-    }
+    public function __construct(public ProductVariant $productVariant) {}
 
     public function via($notifiable): array
     {
